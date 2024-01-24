@@ -2,7 +2,7 @@
 
 # esp-idf-triton
 
-### Lightweight fork of the ![Triton](https://github.com/BradenEverson/triton) crate meant for running precompiled models on embedded systems
+### Lightweight fork of the [Triton](https://github.com/BradenEverson/triton) crate meant for running precompiled models on embedded systems
 
 [![crates.io](https://img.shields.io/crates/v/esp_idf_triton.svg)](https://crates.io/crates/esp_idf_triton)
 [![Documentation](https://docs.rs/esp_idf_triton/badge.svg)](https://docs.rs/esp_idf_triton)
