@@ -101,4 +101,16 @@ impl Network{
         net.rng = net.get_rng();
         net
     }
+    pub fn load_cbor(path: &str) -> Result<Network, serde_cbor::Error> {
+        let file = File::open(path).expect("error loading file");
+        let mut network: Network = serde_cbor::from_reader(file)?;
+        network.rng = network.get_rng();
+        Ok(network)
+    }
+    pub fn to_vec(&self) -> Result<Vec<u8>, serde_cbor::Error> {
+        serde_cbor::to_vec(self)
+    }
+    pub fn from_vec(data: Vec<u8>) -> Result<Network, serde_cbor::Error> {
+        serde_cbor::from_slice(&data[..])
+    }
 }
