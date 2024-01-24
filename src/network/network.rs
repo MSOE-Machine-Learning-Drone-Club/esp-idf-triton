@@ -1,5 +1,6 @@
 use super::layer::distributions::Distributions;
 use super::layer::layers::{Layer, LayerTypes};
+use super::layer::dense::Dense;
 use super::layer::noise::gen_noise;
 use super::layer::pair::GradientPair;
 use super::matrix::Matrix;

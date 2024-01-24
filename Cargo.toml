@@ -1,6 +1,6 @@
 [package]
 name = "esp-idf-triton"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["BradenEverson"]
 description = "Embedded neural network forward feeding for precompiled models created by the triton_grow crate"
 edition = "2021"
