@@ -95,4 +95,9 @@ impl Network{
         net.rng = net.get_rng();
         net
     }
+    pub fn load_str(json_string: &str) -> Network {
+        let mut net: Network = from_str(json_string).expect("Improper json format");
+        net.rng = net.get_rng();
+        net
+    }
 }
