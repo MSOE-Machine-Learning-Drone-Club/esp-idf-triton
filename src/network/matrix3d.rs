@@ -1,11 +1,8 @@
-use rand::RngCore;
-use serde::{Serialize, Deserialize};
-
 use std::ops;
 
-use super::{matrix::Matrix, layer::distributions::Distributions};
+use super::matrix::Matrix;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug)]
 pub struct Matrix3D {
     pub rows: usize,
     pub columns: usize,
@@ -224,18 +221,6 @@ impl Matrix3D{
     }
     pub fn new_empty(rows: usize, cols: usize, layers: usize) -> Matrix3D {
         Matrix3D { rows, columns: cols, layers, data: vec![vec![vec![0.0; cols]; rows]; layers] }
-    }
-    pub fn new_random(rows: usize, cols: usize, layers: usize, rng: &mut Box<dyn RngCore>, distribution: &Distributions) -> Matrix3D {
-        let mut res = Matrix3D::new_empty(rows, cols, layers);
-        
-        for z in 0..layers {
-            for y in 0..rows {
-                for x in 0..cols {
-                    res.data[z][y][x] = distribution.sample(rng);
-                }
-            }
-        }
-        res
     }
     pub fn get_slice(&self, idx: usize) -> Matrix {
         if idx >= self.layers {

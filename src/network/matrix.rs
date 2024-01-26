@@ -1,11 +1,7 @@
-use rand::prelude::*;
 use std::ops::{AddAssign, SubAssign};
 use std::{ops::{self, Range}, iter};
-use serde::{Serialize, Deserialize};
 
-use super::layer::distributions::Distributions;
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug)]
 pub struct Matrix{
     pub rows: usize,
     pub columns: usize,
@@ -290,22 +286,6 @@ impl Matrix{
         }
     }
 
-    pub fn new_random(rows: usize, cols: usize, rng: &mut Box<dyn RngCore>, distribution: &Distributions) -> Matrix{
-        let mut res = Matrix::new_empty(rows, cols); 
-        for row in 0..rows{
-            for col in 0..cols{
-                res.data[row][col] = distribution.sample(rng);
-            }
-        }
-        res
-    }
-
-    pub fn sample_noise(&self, noise: &Range<f32>, rng: &mut Box<dyn RngCore>) -> Matrix {
-        let noise_dist: Distributions = Distributions::Ranged(noise.clone());
-
-        let res = self.clone() + noise_dist.sample(rng);
-        res
-    }
 
     /*pub fn add(&mut self, other: &Matrix) -> Matrix {
         if self.rows != other.rows || self.columns != other.columns {

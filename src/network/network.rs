@@ -1,10 +1,7 @@
 use super::layer::layers::Layer;
 use super::input::Input;
 use super::serialize::ser_layer::SerializedLayer;
-use rand::{RngCore, thread_rng};
-use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize)]
 pub struct Network {
     pub layers: Vec<Box<dyn Layer>>,
 }
@@ -12,9 +9,6 @@ pub struct Network {
 impl Network{
     pub fn new() -> Network {
         Network { layers: vec![] }
-    }
-    fn thread_rng() -> Box<dyn RngCore> {
-        Box::new(thread_rng())
     }
     pub fn predict(&mut self, input: &dyn Input) -> Vec<f32>{
         let in_box: Box<dyn Input> = input.to_box();
@@ -43,14 +37,9 @@ impl Network{
     ///let res = new_net.feed_forward(vec![1.0, 0.54]);
     ///```
     fn feed_forward(&mut self, input_obj: &Box<dyn Input>) -> Vec<f32> {
-        if input_obj.to_param().shape() != self.layers[0].shape(){
-            panic!("Input shape does not match input layer shape \nInput: {:?}\nInput Layer:{:?}", input_obj.shape(), self.layers[0].shape());
-        }
-        
         let mut data_at: Box<dyn Input> = Box::new(input_obj.to_param());
         for i in 0..self.layers.len(){
             data_at = self.layers[i].forward(&data_at);
-            self.layers[i].set_data(&data_at);
         }
         data_at.to_param().to_owned()
     }

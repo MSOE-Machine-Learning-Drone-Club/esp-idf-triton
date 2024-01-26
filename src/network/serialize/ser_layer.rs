@@ -1,4 +1,4 @@
-use crate::network::{layer::{layers::{Layer, LayerTypes}, dense::Dense}, input::Input};
+use crate::network::{layer::{layers::Layer, dense::Dense}, input::Input};
 
 pub struct SerializedLayer {
     pub name: char,
@@ -9,15 +9,7 @@ pub struct SerializedLayer {
 }
 
 impl SerializedLayer {
-    pub fn new(layer: &Box<dyn Layer>, layer_type: &LayerTypes) -> Self {
-        let rows = layer.get_weights().to_param_2d().len();
-        let cols = layer.get_weights().to_param_2d()[0].len();
-        let weights: String = SerializedLayer::flatten_string(&layer.get_weights().to_param_2d());
-        let bias = SerializedLayer::flatten_string(&layer.get_biases().to_param_2d());
-
-        Self { name: 'D', rows, cols, weights, bias }
-    }
-    pub fn from(&self) -> Box<dyn Layer> {
+        pub fn from(&self) -> Box<dyn Layer> {
         match self.name {
             'D' => {
                 let weights_f32: Vec<f32> = self.weights.split(" ").into_iter().map(|val| val.parse().unwrap()).collect();

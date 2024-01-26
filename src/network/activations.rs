@@ -1,5 +1,4 @@
 use std::f32::consts::E;
-use serde::{Deserialize, Serialize};
 
 use super::{matrix::Matrix, input::Input};
 
@@ -9,7 +8,7 @@ pub struct Activation<'a>{
     pub derivative: &'a dyn Fn(f32) -> f32
 }
 
-#[derive(Clone, Copy, Serialize, Deserialize)]
+#[derive(Clone, Copy)]
 pub enum Activations{
     SIGMOID,
     TANH,
