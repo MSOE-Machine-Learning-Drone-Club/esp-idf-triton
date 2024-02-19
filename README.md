@@ -1,4 +1,4 @@
-  <img align="left" src="https://raw.githubusercontent.com/BradenEversundaa/master/unda.svg" width="75px" height="75px" alt="unda icon">
+  <img align="left" src="https://raw.githubusercontent.com/BradenEverson/unda/master/unda.svg" width="75px" height="75px" alt="unda icon">
 
 # esp-idf-unda
 
