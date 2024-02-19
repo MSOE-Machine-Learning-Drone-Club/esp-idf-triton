@@ -1,8 +1,8 @@
 [package]
-name = "esp-idf-triton"
-version = "0.1.6"
+name = "esp-idf-unda"
+version = "0.1.0"
 authors = ["BradenEverson"]
-description = "Embedded neural network forward feeding for precompiled models created by the triton_grow crate"
+description = "Embedded neural network forward feeding for precompiled models created by the unda crate"
 edition = "2021"
 license = "MIT"
 

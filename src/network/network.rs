@@ -43,7 +43,7 @@ impl Network{
         }
         data_at.to_param().to_owned()
     }
-    pub fn deserialize_triton_fmt_string(format_string: String) -> Network {
+    pub fn deserialize_unda_fmt_string(format_string: String) -> Network {
         let mut net: Network = Network::new();
         let parse_triton = format_string.split("#");
         for layer in parse_triton {
