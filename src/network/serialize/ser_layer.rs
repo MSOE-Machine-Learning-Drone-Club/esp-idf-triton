@@ -1,4 +1,4 @@
-use crate::network::{layer::{layers::Layer, dense::Dense}, input::Input};
+use crate::network::{layer::{layers::Layer, dense::Dense}, input::Input, activations::Activations};
 
 pub struct SerializedLayer {
     pub name: char,
@@ -9,12 +9,12 @@ pub struct SerializedLayer {
 }
 
 impl SerializedLayer {
-        pub fn from(&self) -> Box<dyn Layer> {
+    pub fn from(&self, activation: Activations) -> Box<dyn Layer> {
         match self.name {
             'D' => {
                 let weights_f32: Vec<f32> = self.weights.split(" ").into_iter().map(|val| val.parse().unwrap()).collect();
                 let bias_f32: Vec<f32> = self.bias.split(" ").into_iter().map(|val| val.parse().unwrap()).collect();
-                let dense_layer: Dense = Dense::new_ser(self.rows, self.cols, weights_f32, bias_f32);
+                let dense_layer: Dense = Dense::new_ser(self.rows, self.cols, weights_f32, bias_f32, activation);
                 return Box::new(dense_layer)
             },
             _ => panic!("Not a supported type"),

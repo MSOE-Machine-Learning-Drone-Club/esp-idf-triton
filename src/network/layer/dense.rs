@@ -26,7 +26,7 @@ pub struct Dense{
 }
 
 impl Dense{
-    pub fn new_ser(rows: usize, cols: usize, flat_weight: Vec<f32>, flat_bias: Vec<f32>) -> Dense {
+    pub fn new_ser(rows: usize, cols: usize, flat_weight: Vec<f32>, flat_bias: Vec<f32>, activation: Activations) -> Dense {
         let weight_shape: Matrix = Matrix::from_sized(flat_weight, rows, cols);
         let bias_shape: Matrix = Matrix::from_sized(flat_bias, rows, 1);
 
@@ -35,7 +35,7 @@ impl Dense{
             biases: bias_shape,
             data: Matrix::new_empty(0, 0),
             loss: 1.0,
-            activation_fn: Activations::SIGMOID,
+            activation_fn: activation,
             learning_rate: 0.01,
             beta1: 0.99,
             beta2: 0.99,

@@ -1,3 +1,4 @@
+use super::activations::Activations;
 use super::layer::layers::Layer;
 use super::input::Input;
 use super::serialize::ser_layer::SerializedLayer;
@@ -43,11 +44,11 @@ impl Network{
         }
         data_at.to_param().to_owned()
     }
-    pub fn deserialize_unda_fmt_string(format_string: String) -> Network {
+    pub fn deserialize_unda_fmt_string(format_string: String, activation: Activations) -> Network {
         let mut net: Network = Network::new();
         let parse_triton = format_string.split("#");
         for layer in parse_triton {
-            let new_layer: Box<dyn Layer> = SerializedLayer::from_string(layer.to_string()).from();
+            let new_layer: Box<dyn Layer> = SerializedLayer::from_string(layer.to_string()).from(activation);
             net.layers.push(new_layer);
         }
         net
